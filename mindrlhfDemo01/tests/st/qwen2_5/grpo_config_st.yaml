@@ -1,0 +1,152 @@
+# RL config
+rl_config:
+  model_name: 'qwen2.5'
+  deterministic: "OFF"
+  align_type: 'rlhf_stages'
+  dataset_file: "/path/train.mindrecord"
+  tokenizer_type: 'qwen'
+  tokenizer_dir: "/path/"
+  epochs: 10
+  batch_size: 1
+  sink_size: 2
+  seq_length: 8192
+  use_parallel: True
+  load_ckpt_format: "hf_safetensors"
+  parallel_mode: "semi_auto_parallel"
+  enable_compile_cache: False
+  save_strategy_dir: "./strategy/"  # need to be set
+  save_data_file: "/tmp/grpo.mindrecord"
+
+  packing: True
+  pack_num: 1
+
+  save_prompt_completions_data: True
+  save_prompt_completions_interval: 1
+  save_prompt_completions_dir: "/tmp/"
+
+  reshard_mem_opt_level: 0
+  save_ckpt_interval: 5
+  enable_reshard_optimizer: False
+
+  tensorboard: False
+  tensorboard_dir: '/tmp/'
+  tensorboard_queue_size: 10
+
+  performance_stats: False
+  micro_batch_interleaved: 1
+
+  beta: 0.01 # KL coefficient
+  num_generations: 8
+  num_rollouts: 4
+  chunk_size: 1
+  gen_experience_kwargs: False
+  enable_oldpolicy: False
+
+
+# actor model config
+actor_config:
+  load: ""
+  save: "ckpt/train/"
+  model_config: "./qwen2_5/finetune_qwen2_5_7b_st.yaml"  # need to be set
+  enable_alltoall: False
+  offset: 0
+  use_eod_attn_mask_compression: False
+  parallel_config:
+    data_parallel: 1  # need to be set
+    model_parallel: 4  # need to be set
+    pipeline_stage: 2  # need to be set
+    use_seq_parallel: True
+    micro_batch_num: 4
+    vocab_emb_dp: False
+  recompute_config:
+    recompute: True
+    select_recompute: False
+  enable_parallel_optimizer: True
+
+  optimizer:
+    type: 'adamw'
+    adam_beta1: 0.9
+    adam_beta2: 0.95
+    eps: 1.0e-8
+    weight_decay: 0.01
+    opt_offload: False
+
+  lr_schedule:
+    lr_decay_style: 'cosine'
+    lr: 5.0e-7
+    min_lr: 1.0e-10
+    warmup_step: 10
+    decay_steps: 200000
+
+
+# reference model config
+ref_config:
+  model_config: "./qwen2_5/ref_qwen2_5_7b_instruct_st.yaml"  # need to be set
+  load: ""
+  ref_model_batch_size: 2
+  offset: 0
+  use_eod_attn_mask_compression: False
+  # Whether to synchronize the reference model with the actor model every `ref_model_sync_steps`"
+  sync_ref_model: False
+  ref_model_sync_steps: 50
+
+  parallel_config:
+    data_parallel: 2  # need to be set
+    model_parallel: 4  # need to be set
+    pipeline_stage: 1  # need to be set
+
+
+# reward config
+reward_config:
+  verifier_function: ["accuracy_reward", "format_reward"]
+  verifier_weight: [1.0, 1.0]
+
+
+# generate config
+generate_config:
+  model_config: "./qwen2_5/predict_qwen2_5_7b_instruct_st.yaml"  # need to be set
+  load: ""
+  infer_model_batch_size: 2
+
+  parallel_config:
+    data_parallel: 2  # need to be set
+    model_parallel: 4  # need to be set
+    pipeline_stage: 1  # need to be set
+
+  use_vllm: 0  #0--MindFormers; 1--VLLM; 2--DEBUG mode: init model with vllm, but generate with mindformers
+  hf_config_path: "./config.json"   # vllm config path
+  block_size: 16
+  max_model_len: 25536
+  max_num_batched_tokens: 25536
+  max_num_seqs: 1024
+  max_prompt_length: 2048
+  num_scheduler_steps: 32
+  gpu_memory_utilization: 0.8
+
+  sampling_config:
+    max_tokens: 512  # max_decode_length
+    min_tokens: 2  # min_decode_length
+    temperature: 0.8
+    repetition_penalty: 1.05
+    top_p: 0.8
+    top_k: 20
+    bos_token_id: 151643
+    eos_token_id: [151645, 151643]
+    pad_token_id: 151643
+    detokenize: False
+
+
+# context
+context:
+  mode: 0 # 0--Graph Mode; 1--Pynative Mode
+  device_target: "Ascend"
+  max_call_depth: 10000
+  max_device_memory: "58GB"
+  save_graphs: False
+  save_graphs_path: "./graph/"
+  device_id: 0
+  jit_config:
+    jit_level: "O0"
+  memory_optimize_level: "O0"
+  ascend_config:
+    precision_mode: "must_keep_origin_dtype"

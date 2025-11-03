@@ -1,0 +1,63 @@
+[
+    {
+      "prompts": ["Q: Zoey says, 'Jacob is a knave.' Jacob says, 'Zoey and I are of the same kind.'\n"],
+      "completions": ["Assistant:\n<think>If Zoey is telling the truth, then Jacob is a knave. Then Jacob lies, so they are not the same. </think><answer>\nZoey is a knight\nJacob is a knave\n</answer>"],
+      "solutions": ["Zoey is a knight\nJacob is a knave"],
+      "expected_rewards": [3.0]
+    },
+    {
+      "prompts": ["Q: Zoey says, 'Jacob is a knave.' Jacob says, 'Zoey and I are of the same kind.'\n"],
+      "completions": ["Assistant:\n<think>Maybe Zoey is lying, so Jacob is a knight.</think><answer>Zoey is a knave. Jacob is a knight</answer>"],
+      "solutions": ["Zoey is a knight\nJacob is a knave"],
+      "expected_rewards": [-0.5]
+    },
+    {
+      "prompts": ["Q: Zoey says, 'Jacob is a knave.' Jacob says, 'Zoey and I are of the same kind.'\n"],
+      "completions": ["Assistant:\n<think>Logic seems fine.</think><answer>Zoey: knight, Jacob: knave</answer>"],
+      "solutions": ["Zoey is a knight\nJacob is a knave"],
+      "expected_rewards": [-1.0]
+    },
+    {
+      "prompts": ["Q: Zoey says, 'Jacob is a knave.' Jacob says, 'Zoey and I are of the same kind.'\n"],
+      "completions": ["Assistant:\n<think>Answering part of the question.</think><answer>Zoey is a knight</answer>"],
+      "solutions": ["Zoey is a knight\nJacob is a knave"],
+      "expected_rewards": [-1.0]
+    },
+    {
+      "prompts": ["Q: Zoey says, 'Jacob is a knave.' Jacob says, 'Zoey and I are of the same kind.'\n"],
+      "completions": ["Assistant:\n<think>Clean logic.</think><answer>Zoey is a knight. Jacob is a knave. Liam is a knight</answer>"],
+      "solutions": ["Zoey is a knight\nJacob is a knave"],
+      "expected_rewards": [-1.0]
+    },
+    {
+      "prompts": ["Q: Zoey says, 'Jacob is a knave.'\n"],
+      "completions": ["Assistant:\n<answer>Zoey is a knight. Jacob is a knave</answer>"],
+      "solutions": ["Zoey is a knight\nJacob is a knave"],
+      "expected_rewards": [-3.0]
+    },
+    {
+      "prompts": ["Q: Zoey says, 'Jacob is a knave.'\n"],
+      "completions": ["Assistant:\n<answer>Zoey is a knight. Jacob is a knave</answer><think>Proof goes here</think>"],
+      "solutions": ["Zoey is a knight\nJacob is a knave"],
+      "expected_rewards": [-3.0]
+    },
+    {
+      "prompts": ["Q: Zoey says, 'Jacob is a knave.'\n"],
+      "completions": ["Assistant:\n<think>Analyzing...</think><answer>Zoey is a knight. Jacob is a knave</answer><answer>Again</answer>"],
+      "solutions": ["Zoey is a knight\nJacob is a knave"],
+      "expected_rewards": [-3.0]
+    },
+    {
+      "prompts": ["Q: Zoey says, 'Jacob is a knave.'\n"],
+      "completions": ["Assistant:\n<think><answer>Zoey is a knight. Jacob is a knave</answer></think>"],
+      "solutions": ["Zoey is a knight\nJacob is a knave"],
+      "expected_rewards": [-3.0]
+    },
+    {
+      "prompts": ["Q: Zoey says, 'Jacob is a knave.'\n"],
+      "completions": ["Assistant:\n<think>Conclusion reached.</think><answer> </answer>"],
+      "solutions": ["Zoey is a knight\nJacob is a knave"],
+      "expected_rewards": [-1.0]
+    }
+  ]
+  

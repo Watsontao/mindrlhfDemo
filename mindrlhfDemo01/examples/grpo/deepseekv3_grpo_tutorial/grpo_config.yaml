@@ -1,0 +1,195 @@
+# RL config
+rl_config:
+  model_name: 'deepseek'
+  deterministic: "OFF"
+  align_type: 'rlhf_stages'
+  dataset_file: "/path/train.mindrecord"
+  tokenizer_dir: "/path/"
+  epochs: 10
+  batch_size: 1
+  sink_size: 1
+  seq_length: 8192
+  use_parallel: True
+  load_ckpt_format: "ms_safetensors"
+  parallel_mode: "semi_auto_parallel"
+  enable_compile_cache: False
+  save_strategy_dir: "./strategy/"  # need to be set
+  save_data_file: "/tmp/grpo.mindrecord"
+  tokenizer_type: 'deepseek'
+  packing: True
+  pack_num: 1
+
+  save_prompt_completions_data: True
+  save_prompt_completions_interval: 1
+  save_prompt_completions_dir: "/tmp/"
+
+  reshard_mem_opt_level: 0
+  save_ckpt_interval: 5
+  save_max_ckpt_num: 5
+  save_ckpt_format: "safetensors" # format support safetensors/ckpt
+  enable_reshard_optimizer: False
+
+  tensorboard: False
+  tensorboard_dir: '/tmp/'
+  tensorboard_queue_size: 10
+
+  performance_stats: False
+  micro_batch_interleaved: 1
+
+  beta: 0.01 # KL coefficient
+  num_generations: 8
+  num_rollouts: 4
+  chunk_size: 1
+  gen_experience_kwargs: False
+  # clip higher
+  num_iterations: 1
+  epsilon_low: 0.2
+  epsilon_high: 0.2
+  enable_oldpolicy: True
+  seed: 0
+
+
+monitor_config:
+  host_monitor_interval: -1.0
+  host_monitor_steps: [ ]
+  host_memory_protection: False
+  host_max_memory_threshold: 0.95
+
+# actor model config
+actor_config:
+  load: ""
+  save: "/tmp/"
+  model_config: "./model_configs/deepseek_v3_config/finetune_deepseek3_671b.yaml"  # need to be set
+  enable_alltoall: False
+  offset: 0
+  use_eod_attn_mask_compression: True
+  loss_scale_value: 1
+  parallel_config:
+    data_parallel: 4  # need to be set
+    model_parallel: 8  # need to be set
+    pipeline_stage: 16  # need to be set
+    use_seq_parallel: False
+    micro_batch_num: 16
+    vocab_emb_dp: False
+    expert_parallel: 32
+    context_parallel: 1
+  recompute_config:
+    recompute: True
+    select_recompute: False
+  enable_parallel_optimizer: True
+
+  optimizer:
+    type: 'adamw'
+    adam_beta1: 0.9
+    adam_beta2: 0.95
+    eps: 1.0e-8
+    weight_decay: 0.01
+    opt_offload: False
+
+  lr_schedule:
+    lr_decay_style: 'cosine'
+    lr: 5.0e-7
+    min_lr: 1.0e-10
+    warmup_step: 10
+    decay_steps: 200000
+
+
+# reference model config
+ref_config:
+  model_config: "./model_configs/deepseek_v3_config/ref_deepseek3_671b.yaml"  # need to be set
+  load: ""
+  ref_model_batch_size: 1
+  offset: 0
+  use_eod_attn_mask_compression: True
+  # Whether to synchronize the reference model with the actor model every `ref_model_sync_steps`"
+  sync_ref_model: False
+  ref_model_sync_steps: 50
+
+  parallel_config:
+    data_parallel: 4  # need to be set
+    model_parallel: 128  # need to be set
+    pipeline_stage: 1  # need to be set
+    context_parallel: 1
+    expert_parallel: 1
+
+
+# reward config
+reward_config:
+  verifier_function: ["accuracy_reward", "format_reward"]
+  verifier_weight: [1.0, 1.0]
+
+
+# generate config
+generate_config:
+  model_config: "./model_configs/deepseek_v3_config/predict_deepseek3_671b.yaml"  # need to be set
+  load: ""
+  infer_model_batch_size: 2
+
+  parallel_config:
+    data_parallel: 4  # need to be set
+    model_parallel: 128  # need to be set
+    pipeline_stage: 1  # need to be set
+    context_parallel: 1
+    expert_parallel: 256
+
+  use_vllm: 1  # 0--MindFormers; 1--VLLM; 2--DEBUG mode; init model with vllm, but generate with mindformers
+  hf_config_path: "./config.json"   # vllm config path
+  block_size: 128
+  max_model_len: 4096
+  max_num_batched_tokens: 4096
+  max_num_seqs: 1024
+  max_prompt_length: 2048
+  num_scheduler_steps: 32
+  gpu_memory_utilization: 0.9
+
+  sampling_config:
+    max_tokens: 1024  # max_decode_length
+    min_tokens: 2  # min_decode_length
+    temperature: 0.3
+    repetition_penalty: 1
+    top_p: 1
+    top_k: 1
+    bos_token_id: 0
+    eos_token_id: [1]
+    pad_token_id: 1
+    detokenize: False
+
+
+# context
+context:
+  mode: 0 # 0--Graph Mode; 1--Pynative Mode
+  device_target: "Ascend"
+  max_call_depth: 10000
+  max_device_memory: "58GB"
+  save_graphs: False
+  save_graphs_path: "./graph/"
+  device_id: 0
+  jit_config:
+    jit_level: "O0"
+  memory_optimize_level: "O0"
+  ascend_config:
+    precision_mode: "must_keep_origin_dtype"
+
+
+# profiler config
+profiler_config:
+  profile: false
+  mstx: false
+  stage: all
+  profile_save_path: ./profiler_data
+  profile_step_start: 0
+  profile_step_end: 1
+  profile_level: level1
+  profile_with_memory: false
+  profile_with_cpu: true
+  profile_with_npu: true
+  profile_with_stack: false
+  profile_analysis: false
+  profile_ranks: all
+
+# msprobe config
+msprobe_config:
+  msprobe: false
+  dump_path: "./msprobe_dump"
+  key_data_dump: false
+  configurations_dump: false

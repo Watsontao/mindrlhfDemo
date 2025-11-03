@@ -1,0 +1,162 @@
+# RL config
+rl_config:
+  model_name: 'qwen1.5'
+  deterministic: "ON"
+  align_type: 'train_stages'
+  dataset_file: "/path/test.mindrecord"
+  tokenizer_type: 'qwen'
+  tokenizer_dir: "/path/to/"
+  epochs: 100
+  batch_size: 10
+  sink_size: 10
+  seq_length: 81920
+  use_parallel: False
+  load_ckpt_format: "hf_safetensors"
+  parallel_mode: "auto_parallel"
+  enable_compile_cache: True
+  save_strategy_dir: "./strategy/to/"  # need to be set
+  save_data_file: "/path/grpo.mindrecord"
+
+  packing: False
+  pack_num: 10
+
+  save_prompt_completions_data: False
+  save_prompt_completions_interval: 10
+  save_prompt_completions_dir: "/path/"
+
+  reshard_mem_opt_level: 10
+  enable_reshard_optimizer: True
+
+  tensorboard: True
+  tensorboard_dir: '/path/'
+  tensorboard_queue_size: 100
+
+  save_checkpoint_dir: '/path/'
+  performance_stats: True
+  micro_batch_interleaved: 10
+
+  beta: 0.001 # KL coefficient
+  num_generations: 40
+  num_rollouts: 10
+  chunk_size: 10
+  gen_experience_kwargs: True
+  # clip higher
+  num_iterations: int = 10
+  epsilon_low: float = 0.02
+  epsilon_high: float = 0.02
+  seed: int = 0
+
+
+# actor model config
+actor_config:
+  load: ""
+  save: "ckpt/train/to"
+  model_config: "tmp/qwen2_5_vllm/finetune_qwen2_5_7b_st.yaml"  # need to be set
+  enable_alltoall: True
+  offset: [1, -1]
+  use_eod_attn_mask_compression: False
+  parallel_config:
+    data_parallel: 10  # need to be set
+    model_parallel: 40  # need to be set
+    pipeline_stage: 20  # need to be set
+    use_seq_parallel: True
+    micro_batch_num: 20
+    vocab_emb_dp: True
+  recompute_config:
+    recompute: True
+    select_recompute: True
+  enable_parallel_optimizer: False
+
+  optimizer:
+    type: 'adam'
+    adam_beta1: 0.09
+    adam_beta2: 0.095
+    eps: 2.0e-8
+    weight_decay: 0.001
+    opt_offload: True
+
+  lr_schedule:
+    lr_decay_style: 'linear'
+    lr: 6.0e-7
+    min_lr: 2.0e-10
+    warmup_step: 100
+    decay_steps: 2000000
+
+
+# reference model config
+ref_config:
+  model_config: "tmp/qwen2_5_vllm/ref_qwen2_5_7b_instruct_st.yaml"  # need to be set
+  load: ""
+  ref_model_batch_size: 20
+  offset: [1, -1]
+  use_eod_attn_mask_compression: False
+  # Whether to synchronize the reference model with the actor model every `ref_model_sync_steps`"
+  sync_ref_model: True
+  ref_model_sync_steps: 500
+
+  parallel_config:
+    data_parallel: 40  # need to be set
+    model_parallel: 20  # need to be set
+    pipeline_stage: 10  # need to be set
+  recompute_config:
+    recompute: True
+    select_recompute: True
+
+
+# reward config
+reward_config:
+  verifier_function: ["accuracy_reward"]
+  verifier_weight: [1.0]
+
+
+# generate config
+generate_config:
+  model_config: "tmp/qwen2_5_vllm/predict_qwen2_5_7b_instruct_st.yaml"  # need to be set
+  load: ""
+  infer_model_batch_size: 10
+  offset: [1, -1]
+  trust_remote_code: False
+  use_eod_attn_mask_compression: False
+
+  parallel_config:
+    data_parallel: 80  # need to be set
+    model_parallel: 20  # need to be set
+    pipeline_stage: 10  # need to be set
+
+  use_vllm: 0  #0--MindFormers; 1--VLLM; 2--DEBUG mode: init model with vllm, but generate with mindformers
+  hf_config_path: "tmp/config.json"   # vllm config path
+  block_size: 160
+  max_model_len: 255360
+  max_num_batched_tokens: 255360
+  max_num_seqs: 10240
+  max_prompt_length: 20480
+  num_scheduler_steps: 320
+  gpu_memory_utilization: 0.08
+
+  sampling_config:
+    max_tokens: 160  # max_decode_length
+    min_tokens: 20  # min_decode_length
+    temperature: 0.08
+    repetition_penalty: 1.005
+    top_p: 0.08
+    top_k: 200
+    bos_token_id: 1516430
+    eos_token_id: [151645]
+    pad_token_id: 1516430
+    detokenize: True
+
+
+# context
+context:
+  mode: 1 # 0--Graph Mode; 1--Pynative Mode
+  device_target: "CPU"
+  max_call_depth: 1000
+  max_device_memory: "5GB"
+  save_graphs: True
+  save_graphs_path: "path/graph/"
+  device_id: 1
+  jit_config:
+    jit_level: "O1"
+  memory_optimize_level: "O1"
+  ascend_config:
+    precision_mode: "fp32"

@@ -1,0 +1,74 @@
+[
+    {
+        "question": "Tim has 30 toads. Jim has 20 more toads than Tim does. Sarah has twice as many toads as Jim does. How many toads does Sarah have?",
+        "answer": " If Tim has 30 toads and Jim has 20 more toads than Tim, then Jim has:\n\n30 (Tim's toads) + 20 = 50 toads\n\nSince Sarah has twice as many toads as Jim, she has:\n\n50 (Jim's toads) x 2 = 100 toads\n\nSo, Sarah has 100 toads.",
+        "parsed_answer": " if tim has 30 toads and jim has 20 more toads than tim, then jim has:\n\n30 (tim's toads) + 20 = 50 toads\n\nsince sarah has twice as many toads as jim, she has:\n\n50 (jim's toads) x 2 = 100 toads\n\nso, sarah has 100 toads.",
+        "solution": "100",
+        "reward": 0.0,
+        "completion_length": 87
+    },
+    {
+        "question": "The tripodasaurus has three legs. In a flock of tripodasauruses, there is a total of 20 heads and legs. How many tripodasauruses are in the flock?",
+        "answer": " Each tripodasaurus has 1 head and 3 legs, so each tripodasaurus has a total of 1 + 3 = 4 heads and legs.\nIf there are a total of 20 heads and legs, then there must be 20/4 = 5 tripodasauruses in the flock.\n#### 5\nThe answer is: 5",
+        "parsed_answer": " each tripodasaurus has 1 head and 3 legs, so each tripodasaurus has a total of 1 + 3 = 4 heads and legs.\nif there are a total of 20 heads and legs, then there must be 20/4 = 5 tripodasauruses in the flock.\n#### 5\nthe answer is: 5",
+        "solution": "5",
+        "reward": 0.0,
+        "completion_length": 77
+    },
+    {
+        "question": "Junior has 16 rabbits. On Monday, he bought 6 toys for his rabbits. On Wednesday, he bought twice as many toys as he did Monday. On Friday, he bought four times as many toys as he did on Monday, and on the next day he bought half as many toys as he did on Wednesday. If he split all the toys evenly between the rabbits, how many toys would each rabbit have?",
+        "answer": " Let's break down the problem step-by-step to determine how many toys each rabbit will have after Junior buys all the toys and splits them evenly.\n\n1. **Calculate the number of toys bought on each day:**\n   - On Monday, Junior bought 6 toys.\n   - On Wednesday, Junior bought twice as many toys as on Monday, so he bought \\(2 \\times 6 = 12\\) toys.\n   - On Friday, Junior bought four times as many toys as on Monday, so he bought \\(4 \\times 6 = 24\\) toys.\n   - On the next day (Saturday), Junior bought half as many toys as on Wednesday, so he bought \\(\\frac{12}{2} = 6\\) toys.\n\n2. **Calculate the total number of toys bought:**\n   - Total toys = Toys on Monday + Toys on Wednesday + Toys on Friday + Toys on Saturday\n   - Total toys = \\(6 + 12 + 24 + 6 = 48\\)\n\n3. **Split the toys evenly among the rabbits:**\n   - Junior has 16 rabbits, so each rabbit will get \\(\\frac{48}{16} = 3\\) toys.\n\nLet's confirm this with Python code.\n```python\n# Number of toys bought on each day\ntoys_monday = 6\ntoys_wednesday = 2 * toys_monday\ntoys_friday = 4 * toys_monday\ntoys_saturday = toys_wednesday / 2\n\n# Total number of toys\ntotal_toys = toys_monday + toys_wednesday + toys_friday + toys_saturday\n\n# Number of rabbits\nnum_rabbits = 16\n\n# Toys per rabbit\ntoys_per_rabbit = total_toys / num_rabbits\nprint(toys_per_rabbit)\n```\n```output\n3.0\n```\nThe calculation confirms that each rabbit will have \\(\\boxed{3}\\) toys.",
+        "parsed_answer": "3",
+        "solution": "3",
+        "reward": 1.0,
+        "completion_length": 415
+    },
+    {
+        "question": "Timmy, Tommy and Tina are filling up a kiddie pool in their backyard.  Each has a pail they fill with water from a house before dumping it into the pool.  If Timmy's pail holds twice as much water as Tommy's, and Tommy's holds 2 gallons more than Tina's, and Tina's is 4 gallons, how much water do the three of them fill the pool with after 3 trips each?",
+        "answer": " If Tina's pail holds 4 gallons, and Tommy's holds 2 gallons more than Tina's, then Tommy's pail holds 4+2=6 gallons.\nIf Timmy's pail holds twice as much water as Tommy's, then Timmy's pail holds 6*2=12 gallons.\nIn total, for each trip, they fill the pool with 4+6+12=22 gallons.\nAfter 3 trips each, they fill the pool with 22*3=66 gallons.\n#### 66\nThe answer is: 66",
+        "parsed_answer": " if tina's pail holds 4 gallons, and tommy's holds 2 gallons more than tina's, then tommy's pail holds 4+2=6 gallons.\nif timmy's pail holds twice as much water as tommy's, then timmy's pail holds 6*2=12 gallons.\nin total, for each trip, they fill the pool with 4+6+12=22 gallons.\nafter 3 trips each, they fill the pool with 22*3=66 gallons.\n#### 66\nthe answer is: 66",
+        "solution": "66",
+        "reward": 0.0,
+        "completion_length": 124
+    },
+    {
+        "question": "A pet store has six dogs for sale. They have half as many cats, twice as many birds, and thrice as many fish for sale. How many animals are for sale in the pet store?",
+        "answer": " To determine the total number of animals for sale in the pet store, we need to calculate the number of each type of animal and then sum them up.\n\n1. **Number of dogs**: The pet store has 6 dogs.\n2. **Number of cats**: The number of cats is half the number of dogs. Therefore, the number of cats is:\n   \\[\n   \\frac{6}{2} = 3\n   \\]\n3. **Number of birds**: The number of birds is twice the number of dogs. Therefore, the number of birds is:\n   \\[\n   6 \\times 2 = 12\n   \\]\n4. **Number of fish**: The number of fish is three times the number of dogs. Therefore, the number of fish is:\n   \\[\n   6 \\times 3 = 18\n   \\]\n\nNow, we sum the number of each type of animal to find the total number of animals for sale:\n\\[\n6 \\text{ (dogs)} + 3 \\text{ (cats)} + 12 \\text{ (birds)} + 18 \\text{ (fish)} = 39\n\\]\n\nThus, the total number of animals for sale in the pet store is \\(\\boxed{39}\\).",
+        "parsed_answer": "39",
+        "solution": "39",
+        "reward": 1.0,
+        "completion_length": 267
+    },
+    {
+        "question": "Janet hires six employees. Four of them are warehouse workers who make $15/hour, and the other two are managers who make $20/hour. Janet has to pay 10% of her workers' salaries in FICA taxes. If everyone works 25 days a month and 8 hours a day, how much does Janet owe total for their wages and taxes for one month?",
+        "answer": " To determine the total amount Janet owes for her employees' wages and FICA taxes for one month, we need to follow these steps:\n\n1. Calculate the monthly wage for each warehouse worker.\n2. Calculate the monthly wage for each manager.\n3. Compute the total monthly wage for all employees.\n4. Calculate the FICA taxes based on the total monthly wage.\n5. Sum the total monthly wage and the FICA taxes to get the final amount.\n\nLet's break this down step by step and write the Python code to compute the result accurately.\n\n1. Each warehouse worker makes $15/hour and works 25 days a month for 8 hours a day. So, the monthly wage for each warehouse worker is \\(15 \\times 25 \\times 8\\).\n2. Each manager makes $20/hour and works 25 days a month for 8 hours a day. So, the monthly wage for each manager is \\(20 \\times 25 \\times 8\\).\n3. There are 4 warehouse workers and 2 managers, so the total monthly wage for all employees is \\(4 \\times (15 \\times 25 \\times 8) + 2 \\times (20 \\times 25 \\times 8)\\).\n4. The FICA taxes are 10% of the total monthly wage.\n5. The total amount Janet owes is the sum of the total monthly wage and the FICA taxes.\n\nNow let's implement this in Python.\n```python\n# Define the hourly rates and working hours\nhourly_rate_warehouse_worker = 15\nhourly_rate_manager = 20\ndays_per_month = 25\nhours_per_day = 8\n\n# Calculate the monthly wage for each warehouse worker and manager\nmonthly_wage_warehouse_worker = hourly_rate_warehouse_worker * days_per_month * hours_per_day\nmonthly_wage_manager = hourly_rate_manager * days_per_month * hours_per_day\n\n# Calculate the total monthly wage for all employees\nnum_warehouse_workers = 4\nnum_managers = 2\ntotal_monthly_wage = (num_warehouse_workers * monthly_wage_warehouse_worker) + (num_managers * monthly_wage_manager)\n\n# Calculate the FICA taxes (10% of the total monthly wage)\nfica_taxes = 0.10 * total_monthly_wage\n\n# Calculate the total amount owed\ntotal_amount_owed = total_monthly",
+        "parsed_answer": " to determine the total amount janet owes for her employees' wages and fica taxes for one month, we need to follow these steps:\n\n1. calculate the monthly wage for each warehouse worker.\n2. calculate the monthly wage for each manager.\n3. compute the total monthly wage for all employees.\n4. calculate the fica taxes based on the total monthly wage.\n5. sum the total monthly wage and the fica taxes to get the final amount.\n\nlet's break this down step by step and write the python code to compute the result accurately.\n\n1. each warehouse worker makes $15/hour and works 25 days a month for 8 hours a day. so, the monthly wage for each warehouse worker is \\(15 \\times 25 \\times 8\\).\n2. each manager makes $20/hour and works 25 days a month for 8 hours a day. so, the monthly wage for each manager is \\(20 \\times 25 \\times 8\\).\n3. there are 4 warehouse workers and 2 managers, so the total monthly wage for all employees is \\(4 \\times (15 \\times 25 \\times 8) + 2 \\times (20 \\times 25 \\times 8)\\).\n4. the fica taxes are 10% of the total monthly wage.\n5. the total amount janet owes is the sum of the total monthly wage and the fica taxes.\n\nnow let's implement this in python.\n```python\n# define the hourly rates and working hours\nhourly_rate_warehouse_worker = 15\nhourly_rate_manager = 20\ndays_per_month = 25\nhours_per_day = 8\n\n# calculate the monthly wage for each warehouse worker and manager\nmonthly_wage_warehouse_worker = hourly_rate_warehouse_worker * days_per_month * hours_per_day\nmonthly_wage_manager = hourly_rate_manager * days_per_month * hours_per_day\n\n# calculate the total monthly wage for all employees\nnum_warehouse_workers = 4\nnum_managers = 2\ntotal_monthly_wage = (num_warehouse_workers * monthly_wage_warehouse_worker) + (num_managers * monthly_wage_manager)\n\n# calculate the fica taxes (10% of the total monthly wage)\nfica_taxes = 0.10 * total_monthly_wage\n\n# calculate the total amount owed\ntotal_amount_owed = total_monthly",
+        "solution": "22000",
+        "reward": 0.0,
+        "completion_length": 512
+    },
+    {
+        "question": "Tim has 30 toads. Jim has 20 more toads than Tim does. Sarah has twice as many toads as Jim does. How many toads does Sarah have?",
+        "answer": " Let's break down the problem step by step and then use Python code to verify our solution.\n\n1. First, we know that Tim has 30 toads.\n2. Jim has 20 more toads than Tim. So, Jim has \\(30 + 20 = 50\\) toads.\n3. Sarah has twice as many toads as Jim. So, Sarah has \\(2 \\times 50 = 100\\) toads.\n\nNow, let's write the Python code to confirm this calculation.\n```python\n# Number of toads Tim has\ntim_toads = 30\n\n# Number of toads Jim has\njim_toads = tim_toads + 20\n\n# Number of toads Sarah has\nsarah_toads = jim_toads * 2\n\nprint(sarah_toads)\n```\n```output\n100\n```\nThe number of toads Sarah has is \\(\\boxed{100}\\).",
+        "parsed_answer": "100",
+        "solution": "100",
+        "reward": 1.0,
+        "completion_length": 205
+    },
+    {
+        "question": "Timmy, Tommy and Tina are filling up a kiddie pool in their backyard.  Each has a pail they fill with water from a house before dumping it into the pool.  If Timmy's pail holds twice as much water as Tommy's, and Tommy's holds 2 gallons more than Tina's, and Tina's is 4 gallons, how much water do the three of them fill the pool with after 3 trips each?",
+        "answer": " If Tina's pail holds 4 gallons of water, and Tommy's pail holds 2 gallons more than Tina's, then Tommy's pail holds 4+2 = 6 gallons of water.\nIf Timmy's pail holds twice as much water as Tommy's, then Timmy's pail holds 6*2 = 12 gallons of water.\nIf each of them makes 3 trips to fill the pool, then Timmy will add 12*3 = 36 gallons of water to the pool.\nTommy will add 6*3 = 18 gallons of water to the pool.\nAnd Tina will add 4*3 = 12 gallons of water to the pool.\nIn total, the three of them will add 36+18+12 = 66 gallons of water to the pool.\n#### 66\nThe answer is: 66",
+        "parsed_answer": " if tina's pail holds 4 gallons of water, and tommy's pail holds 2 gallons more than tina's, then tommy's pail holds 4+2 = 6 gallons of water.\nif timmy's pail holds twice as much water as tommy's, then timmy's pail holds 6*2 = 12 gallons of water.\nif each of them makes 3 trips to fill the pool, then timmy will add 12*3 = 36 gallons of water to the pool.\ntommy will add 6*3 = 18 gallons of water to the pool.\nand tina will add 4*3 = 12 gallons of water to the pool.\nin total, the three of them will add 36+18+12 = 66 gallons of water to the pool.\n#### 66\nthe answer is: 66",
+        "solution": "66",
+        "reward": 0.0,
+        "completion_length": 190
+    },
+    {
+        "question": "A pet store has six dogs for sale. They have half as many cats, twice as many birds, and thrice as many fish for sale. How many animals are for sale in the pet store?",
+        "answer": " The pet store has 6 dogs for sale.\nThey have half as many cats, so they have 6/2 = 3 cats for sale.\nThey have twice as many birds, so they have 6 x 2 = 12 birds for sale.\nAnd they have thrice as many fish, so they have 6 x 3 = 18 fish for sale.\nIn total, there are 6 + 3 + 12 + 18 = 39 animals for sale in the pet store.\n#### 39\nThe answer is: 39",
+        "parsed_answer": " the pet store has 6 dogs for sale.\nthey have half as many cats, so they have 6/2 = 3 cats for sale.\nthey have twice as many birds, so they have 6 x 2 = 12 birds for sale.\nand they have thrice as many fish, so they have 6 x 3 = 18 fish for sale.\nin total, there are 6 + 3 + 12 + 18 = 39 animals for sale in the pet store.\n#### 39\nthe answer is: 39",
+        "solution": "39",
+        "reward": 0.0,
+        "completion_length": 121
+    }
+]

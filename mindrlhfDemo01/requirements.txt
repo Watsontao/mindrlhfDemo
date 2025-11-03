@@ -1,0 +1,9 @@
+sentencepiece>=0.2.0
+regex>=2022.10.31
+tqdm>=4.65.0
+numpy<2.0.0
+jsonlines==4.0.0
+safetensors>=0.4.4
+latex2sympy2_extended>=1.0.9;python_version>="3.10"
+ray
+mindstudio-probe

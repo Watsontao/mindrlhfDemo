@@ -1,0 +1,70 @@
+run_mode: 'train'
+
+# model config
+model:
+  model_config:
+    type: DeepseekV3Config
+    auto_register: deepseek3_config.DeepseekV3Config
+    batch_size: 1 # add for increase predict
+    seq_length: 4096
+    hidden_size:  7168
+    num_layers: 61
+    num_heads: 128
+    max_position_embeddings: 4096
+    intermediate_size: 18432
+    kv_lora_rank: 512
+    n_kv_heads: 128
+    q_lora_rank: 1536
+    qk_rope_head_dim: 64
+    v_head_dim: 128
+    qk_nope_head_dim: 128
+    vocab_size: 129280
+    multiple_of: 256
+    rms_norm_eps: 1.0e-6
+    bos_token_id: 100000
+    eos_token_id: 100001
+    pad_token_id: 100001
+    ignore_token_id: -100
+    compute_dtype: "bfloat16"
+    layernorm_compute_type: "float32"
+    softmax_compute_type: "float32"
+    rotary_dtype: "float32"
+    router_dense_type: "float32"
+    param_init_type: "float32"
+    qkv_concat: False
+    use_past: False
+    extend_method: "None"
+    use_flash_attention: True
+    offset: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, -1]
+    checkpoint_name_or_path: ""
+    theta: 10000.0
+    return_extra_loss: False
+    mtp_depth: 0
+    mtp_loss_factor: 0.3
+  arch:
+    type: DeepseekV3ForCausalLM
+    auto_register: deepseek3.DeepseekV3ForCausalLM
+
+#moe
+moe_config:
+  expert_num: 256
+  expert_group_size: 8
+  capacity_factor: 1.5
+  aux_loss_factor: 0.05
+  num_experts_chosen: 8
+  routing_policy: "TopkRouterV2"
+  balance_via_topk_bias: True
+  topk_bias_update_rate: 0
+  use_fused_ops_topkrouter: True
+  shared_expert_num: 1
+  routed_scaling_factor: 2.5
+  norm_topk_prob: True
+  first_k_dense_replace: 3
+  moe_intermediate_size: 2048
+  aux_loss_factors: [0]
+  aux_loss_types: ["expert"]
+  z_loss_factor: 0.0
+  expert_model_parallel: 1
+  use_gating_sigmoid: True
+  enable_sdrop: True
+  use_gmm: False
